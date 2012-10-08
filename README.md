@@ -4,11 +4,11 @@ These are just some small methods and wrappers to implement useful features not 
 
 reghelper
 ---------
-Implements DeleteTree(key,subkey) using the _winreg package, to recursively delete a registry key and all subkeys.
+Implements _DeleteTree(key,subkey)_ using the _winreg package, to recursively delete a registry key and all subkeys.
 
-Implements ActionTree(key,subkey,callback) which accepts a callback to be called for each subkey within the key provided, and finally on the parent key. DeleteTree is a wrapper for this function.
+Implements _ActionTree(key,subkey,callback)_ which accepts a callback to be called for each subkey within the key provided, and finally on the parent key. DeleteTree is a wrapper for this function.
 
-Key argument must be a _winreg.HKEY_* constant, or a key already opened through _winreg.OpenKey.
+Key argument must be a _winreg.HKEY* constant, or a key already opened through _winreg.OpenKey.
 
 Subkey argument must be a string containing a subkey of key, and must not be None. 
 
