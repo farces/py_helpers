@@ -8,7 +8,11 @@ Implements DeleteTree(key,subkey) using the _winreg package, to recursively dele
 
 Implements ActionTree(key,subkey,callback) which accepts a callback to be called for each subkey within the key provided, and finally on the parent key. DeleteTree is a wrapper for this function.
 
-Callback must be a function or lambda accepting 2 arguments: 
+Key argument must be a _winreg.HKEY_* constant, or a key already opened through _winreg.OpenKey.
+
+Subkey argument must be a string containing a subkey of key, and must not be None. 
+
+Callback argument must be a function or lambda accepting 2 arguments: 
 * Root key (as passed to ActionTree, e.g. _winreg.HKEY_CURRENT_USER) 
 * Subkey (string representation of subkey within key e.g. SOFTWARE\test\Test Key #1)
 These arguments can be passed directly into _winreg.* functions (such as DeleteKey).
