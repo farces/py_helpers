@@ -22,14 +22,14 @@ def DeleteTree(key_str, subkey_str):
     ActionTree(key_str, subkey_str, lambda k, i: _winreg.DeleteKey(k, i))
 
 
-def ActionTree(key_str, subkey_str, cb):
+def ActionTree(key_str, subkey_str, callback):
     """Perform action in callback for each child subkey, then finally
     on the parent key"""
-    _action_subkeys(key_str, subkey_str, cb)
-    cb(key_str, subkey_str)
+    _action_subkeys(key_str, subkey_str, callback)
+    callback(key_str, subkey_str)
 
 
-def _action_subkeys(key_str, subkey_str, cb):
+def _action_subkeys(key_str, subkey_str, callback):
     """Internal:
     Recursively steps down tree, performing the provided callback for
     each key found, starting at the deepest child subkey."""
@@ -38,11 +38,11 @@ def _action_subkeys(key_str, subkey_str, cb):
     try:
         i = 0
         while True:
-            next = _winreg.EnumKey(current_key, i)
-            next_str = "%s\\%s" % (subkey_str, next)
+            next_key = _winreg.EnumKey(current_key, i)
+            next_str = "%s\\%s" % (subkey_str, next_key)
             l.append(next_str)
-            _action_subkeys(key_str, next_str, cb)
+            _action_subkeys(key_str, next_str, callback)
             i += 1
     except WindowsError:
         for item in l:
-            cb(key_str, item)
+            callback(key_str, item)
