@@ -19,7 +19,7 @@ import _winreg
 
 def DeleteTree(key_str, subkey_str):
     """Wrapper for ActionTree(key,subkey,delete callback)"""
-    ActionTree(key_str, subkey_str, lambda k, i: _winreg.DeleteKey(k, i))
+    ActionTree(key_str, subkey_str, _winreg.DeleteKey)
 
 
 def ActionTree(key_str, subkey_str, callback):
